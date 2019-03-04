@@ -1,19 +1,48 @@
-import java.util.Random;
+import java.util.ArrayList;
 
 public class Runme implements Runnable
 {
 
+   @Override
+   public void run()
+   {
+      // TODO Auto-generated method stub
+      
+   }
+   
    public static void main(String[] args)
    {
-      Train train1 = new Express(speed, time);
-      Train train2 = new Local(speed, time);
-      Station station1 = new Station("Glasgow", speed);
-      Station station2 = new Station("Stirling", speed);
-      Station station3 = new Station("Perth", speed);
-      Station station4 = new Station("Inverness", speed);
-      Track track1 = new Track(speed);
-      Track track2 = new Track(speed);
-      Track track3 = new Track(speed);
+      
+      Railway station1 = new Station("Glasgow",3);
+      Railway station2 = new Station("Stirling", 2);
+      Railway station3 = new Station("Perth", 2);
+      Railway station4 = new Station("Inverness", 2);
+      Railway track1 = new Track();
+      Railway track2 = new Track();
+      Railway track3 = new Track();
+      
+      ArrayList<Object> route = new ArrayList<Object>();
+      route.add(station1);
+      route.add(track1);
+      route.add(station2);
+      route.add(track2);
+      route.add(station3);
+      route.add(track3);
+      route.add(station4);
+      
+      RandomTrainCreater rtc = new RandomTrainCreater();
+      rtc.route = route;
+      Thread tr = new Thread(rtc);
+      tr.start();
+      try
+      {
+         tr.join();
+      }
+      catch (InterruptedException e)
+      {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
       
       //needs to have an object that creates trains randomly and randomly puts them
       //into the first bit of track/station
@@ -24,13 +53,7 @@ public class Runme implements Runnable
       
      
    }
-
    
-   @Override
-   public void run()
-   {
-      // TODO Auto-generated method stub
-      
-   }
+
 
 }

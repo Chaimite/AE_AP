@@ -2,18 +2,12 @@
 public class Express extends Train
 {
    final private int speed = 500;
+   private Track track;
+   private Station station;
 
    @Override
    public int getSpeed()
    {
       return speed;
    }
-
-   @Override
-   public void run()
-   {
-      // TODO Auto-generated method stub
-      
-   }
-
 }

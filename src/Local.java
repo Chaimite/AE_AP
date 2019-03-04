@@ -1,7 +1,7 @@
 
 public class Local extends Train
 {
-   private int speed = 10;
+   final private int speed = 10;
 
    @Override
    public int getSpeed()
@@ -9,10 +9,6 @@ public class Local extends Train
       return speed;
    }
 
-   @Override
-   public void run()
-   {
-      
-   }
+   
 
 }
