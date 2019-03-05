@@ -1,21 +1,27 @@
-import java.util.ArrayList;
+
 
 public abstract class Train extends Thread
 {
    private Railway railway;
    private Station station;
    private Track track;
+   private int trainID;
 
    public abstract int getSpeed();
+
+   public int getTrainID()
+   {
+      return trainID;
+   }
 
    public void run()
    {
       while (true)
       {
-         //adds a train to a railway 
-         
+         // adds a train to a railway
+
          railway.addTrain(this);
-         
+
          if (railway instanceof Station)
          {
             try
@@ -39,7 +45,7 @@ public abstract class Train extends Thread
                e.printStackTrace();
             }
          }
-         //removes a train from the railway
+         // removes a train from the railway
          railway.removeTrain(this);
       }
    }

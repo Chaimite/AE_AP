@@ -1,13 +1,12 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RandomTrainCreater implements Runnable
+public class RandomTrainCreater extends Thread
 {
    private Train newTrain;
-   private Track newTrack;
-   private Station newStation;
    private int delay;
-   public ArrayList<Object> route = new ArrayList<Object>();
+   private int trainID = 0;
+   private ArrayList<Object> route = new ArrayList<Object>();
 
    @Override
    public void run()
@@ -20,11 +19,9 @@ public class RandomTrainCreater implements Runnable
          }
          catch (InterruptedException e)
          {
-            // TODO Auto-generated catch block
             e.printStackTrace();
          }
          insertTrainInRoute(trainCreater());
-         System.out.println(route.get(0));
       }
    }
 
@@ -33,19 +30,19 @@ public class RandomTrainCreater implements Runnable
       Random rand = new Random();
       int randomNumber = rand.nextInt((max + 1) - min) + min;
       return randomNumber;
-
    }
 
    public Train trainCreater()
    {
+      trainID++;
       int randomNumber = getRandomNumber(0, 1);
       if (randomNumber == 0)
       {
-         newTrain = new Express();
+         newTrain = new Express(trainID);
       }
       else
       {
-         newTrain = new Local();
+         newTrain = new Local(trainID);
       }
       return newTrain;
 
@@ -56,7 +53,6 @@ public class RandomTrainCreater implements Runnable
       route.add(0, train);
    }
 
-  
    public int trainDelayCreater()
    {
       delay = getRandomNumber(0, 1000);

@@ -13,6 +13,8 @@ public class Runme implements Runnable
    public static void main(String[] args)
    {
       
+      
+      
       Railway station1 = new Station("Glasgow",3);
       Railway station2 = new Station("Stirling", 2);
       Railway station3 = new Station("Perth", 2);
@@ -21,7 +23,8 @@ public class Runme implements Runnable
       Railway track2 = new Track();
       Railway track3 = new Track();
       
-      ArrayList<Object> route = new ArrayList<Object>();
+      
+      ArrayList<Railway> route = new ArrayList<Railway>();
       route.add(station1);
       route.add(track1);
       route.add(station2);
@@ -31,7 +34,7 @@ public class Runme implements Runnable
       route.add(station4);
       
       RandomTrainCreater rtc = new RandomTrainCreater();
-      rtc.route = route;
+//      rtc.route = route;
       Thread tr = new Thread(rtc);
       tr.start();
       try

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Railway
+public class Railway extends Thread
 {
    ArrayList<Object> trainsInSpecificPart = new ArrayList<Object>();
    private Train train;
@@ -26,6 +26,17 @@ public class Railway
       {
          return true;
       }
+
+   }
+
+   public int printTrainID()
+   {
+      return train.getTrainID();
+   }
+
+   public void run()
+   {
+      this.addTrain(train);
    }
 
 }
