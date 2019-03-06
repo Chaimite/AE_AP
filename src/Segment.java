@@ -1,24 +1,24 @@
 import java.util.ArrayList;
 
-public class Railway extends Thread
+public class Segment extends Thread
 {
-   ArrayList<Object> trainsInSpecificPart = new ArrayList<Object>();
+   ArrayList<Object> segment = new ArrayList<Object>();
    private Train train;
    protected int capacity;
 
    public void removeTrain(Train t)
    {
-      trainsInSpecificPart.remove(t);
+      segment.remove(t);
    }
 
    public void addTrain(Train t)
    {
-      trainsInSpecificPart.add(t);
+      segment.add(t);
    }
 
    public boolean isCapacityFull()
    {
-      if (trainsInSpecificPart.size() == capacity)
+      if (segment.size() == capacity)
       {
          return false;
       }

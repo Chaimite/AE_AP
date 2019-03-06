@@ -1,8 +1,7 @@
 
-
 public abstract class Train extends Thread
 {
-   private Railway railway;
+   private Segment railway;
    private Station station;
    private Track track;
    private int trainID;

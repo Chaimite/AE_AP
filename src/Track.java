@@ -1,5 +1,5 @@
 
-public class Track extends Railway
+public class Track extends Segment
 {
    final private int length = 1000;
 

@@ -1,6 +1,5 @@
-public class Station extends Railway
+public class Station extends Segment
 {
-   private int speed;
    final private int length = 100;
    private String name;
    final private int stop = 5;
