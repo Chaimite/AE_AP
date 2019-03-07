@@ -1,42 +1,23 @@
-import java.util.ArrayList;
 
-public class Segment extends Thread
-{
-   ArrayList<Object> segment = new ArrayList<Object>();
-   private Train train;
-   protected int capacity;
+public abstract class Segment
+{ // abstract class that will have tracks and stations
 
-   public void removeTrain(Train t)
+   private Segment nextSegment;
+
+   public Segment(Segment segment)
    {
-      segment.remove(t);
+      this.nextSegment = segment;
    }
 
-   public void addTrain(Train t)
-   {
-      segment.add(t);
-   }
+   public abstract void addTrain(Train train);
 
-   public boolean isCapacityFull()
-   {
-      if (segment.size() == capacity)
-      {
-         return false;
-      }
-      else
-      {
-         return true;
-      }
+   public abstract void removeTrain(Train train);
 
-   }
+   public abstract int timeInSegment(int speed);
 
-   public int printTrainID()
+   public Segment getNextSegment()
    {
-      return train.getTrainID();
-   }
-
-   public void run()
-   {
-      this.addTrain(train);
+      return nextSegment;
    }
 
 }

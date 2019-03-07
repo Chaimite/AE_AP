@@ -2,13 +2,10 @@
 public class Express extends Train
 {
    final private int speed = 500;
-   private Track track;
-   private Station station;
-   private int trainID;
 
-   public Express(int trainID)
+   public Express(int trainID, Segment segment)
    {
-      this.trainID = trainID;
+      super(segment, trainID);
    }
 
    @Override

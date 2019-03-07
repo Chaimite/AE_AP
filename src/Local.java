@@ -2,11 +2,10 @@
 public class Local extends Train
 {
    final private int speed = 10;
-   private int trainID;
 
-   public Local(int trainID)
+   public Local(int trainID, Segment segment)
    {
-      this.trainID = trainID;
+      super(segment, trainID);
    }
 
    @Override

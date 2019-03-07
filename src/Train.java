@@ -1,10 +1,14 @@
 
-public abstract class Train extends Thread
+public abstract class Train implements Runnable
 {
    private Segment segment;
-   private Station station;
-   private Track track;
    private int trainID;
+
+   public Train(Segment segment, int trainID)
+   {
+      this.segment = segment;
+      this.trainID = trainID;
+   }
 
    public abstract int getSpeed();
 
@@ -17,39 +21,24 @@ public abstract class Train extends Thread
    {
       while (true)
       {
-         // adds a train to a segment
-
          segment.addTrain(this);
-         System.out.println("train in segment");
 
-         if (segment instanceof Station)
+         try
          {
-            try
-            {
-               Thread.sleep(station.stopTime(this.getSpeed()));
-               System.out.println(station.stopTime(this.getSpeed()));
-            }
-            catch (InterruptedException e)
-            {
-               e.printStackTrace();
-            }
+            Thread.sleep(segment.timeInSegment(this.getSpeed()) + 3000);
+            segment.removeTrain(this);
 
-         }
-         else if (segment instanceof Track)
-         {
-            try
+            segment = segment.getNextSegment();
+
+            if (segment == null)
             {
-               Thread.sleep(track.travelTime(this.getSpeed()));
-               System.out.println(track.travelTime(this.getSpeed()));
-            }
-            catch (InterruptedException e)
-            {
-               e.printStackTrace();
+               break;
             }
          }
-         // removes a train from the segment
-         segment.removeTrain(this);
-         
+         catch (InterruptedException e)
+         {
+            e.printStackTrace();
+         }
       }
    }
 }

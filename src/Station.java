@@ -1,17 +1,48 @@
+import java.util.ArrayList;
+
 public class Station extends Segment
 {
    final private int length = 100;
-   private String name;
    final private int stop = 5;
+   private String name;
+   private ArrayList<Train> trains;
+   private int maxCapacity;
 
-   // Stations can have multiple trains at a time i.e. 3 trains at once
-   public Station(String name, int capacity)
+   public Station(String name, int maxCapacity, Segment segment)
    {
+      super(segment);
       this.name = name;
-      this.capacity = capacity;
+      this.maxCapacity = maxCapacity;
+      trains = new ArrayList<Train>(maxCapacity);
    }
 
-   public int stopTime(int speed)
+   @Override
+   public synchronized void addTrain(Train train)
+   {
+      while (trains.size() > maxCapacity)
+      {
+         try
+         {
+            wait();
+         }
+         catch (InterruptedException e)
+         {
+            e.printStackTrace();
+         }
+      }
+      trains.add(train);
+      notifyAll();
+   }
+
+   @Override
+   public synchronized void removeTrain(Train train)
+   {
+      trains.remove(train);
+      notifyAll();
+   }
+
+   @Override
+   public int timeInSegment(int speed)
    {
       int stopTime = length / speed + stop;
       return stopTime;
@@ -19,7 +50,14 @@ public class Station extends Segment
 
    public String toString()
    {
-      return "|----" + name + "----|";
-   }
+      String s = "|----" + name + "-";
+      for (Train train : trains)
+      {
+         s += train.getTrainID() + ",";
 
+      }
+
+      s += "----|";
+      return s;
+   }
 }
