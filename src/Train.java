@@ -1,7 +1,7 @@
 
 public abstract class Train extends Thread
 {
-   private Segment railway;
+   private Segment segment;
    private Station station;
    private Track track;
    private int trainID;
@@ -17,15 +17,17 @@ public abstract class Train extends Thread
    {
       while (true)
       {
-         // adds a train to a railway
+         // adds a train to a segment
 
-         railway.addTrain(this);
+         segment.addTrain(this);
+         System.out.println("train in segment");
 
-         if (railway instanceof Station)
+         if (segment instanceof Station)
          {
             try
             {
                Thread.sleep(station.stopTime(this.getSpeed()));
+               System.out.println(station.stopTime(this.getSpeed()));
             }
             catch (InterruptedException e)
             {
@@ -33,19 +35,21 @@ public abstract class Train extends Thread
             }
 
          }
-         else if (railway instanceof Track)
+         else if (segment instanceof Track)
          {
             try
             {
                Thread.sleep(track.travelTime(this.getSpeed()));
+               System.out.println(track.travelTime(this.getSpeed()));
             }
             catch (InterruptedException e)
             {
                e.printStackTrace();
             }
          }
-         // removes a train from the railway
-         railway.removeTrain(this);
+         // removes a train from the segment
+         segment.removeTrain(this);
+         
       }
    }
 }

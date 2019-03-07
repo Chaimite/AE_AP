@@ -22,6 +22,7 @@ public class RandomTrainCreater extends Thread
             e.printStackTrace();
          }
          insertTrainInRoute(trainCreater());
+        
       }
    }
 
