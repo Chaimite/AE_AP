@@ -12,7 +12,7 @@ public class Printer implements Runnable
    public void run()
    {
       while (true)
-      {
+      {  
          System.out.println(getRouteRepresentation());
          try
          {
@@ -25,7 +25,7 @@ public class Printer implements Runnable
       }
 
    }
-
+   // method to print the route 
    private String getRouteRepresentation()
    {
       Segment route = routeStart;

@@ -68,7 +68,8 @@ public class RandomTrainCreater extends Thread
 
    // generates a route
    public Segment generateRoute()
-   {
+   {  
+      // the last station has to be null, so that the thread can be stopped
       Segment s4 = new Station("Inverness", 4, null);
       Segment t3 = new Track(s4);
       Segment s3 = new Station("Perth", 4, t3);

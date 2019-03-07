@@ -8,7 +8,7 @@ public class Track extends Segment
    {
       super(segment);
    }
-
+   //method to add a train to a track
    @Override
    public synchronized void addTrain(Train train)
    {
@@ -26,7 +26,7 @@ public class Track extends Segment
       this.train = train;
       notifyAll();
    }
-
+   //method to remove a train to a track
    @Override
    public synchronized void removeTrain(Train train)
    {
@@ -36,7 +36,7 @@ public class Track extends Segment
       }
       notifyAll();
    }
-
+   // calculates the time the train will be in the track
    public int timeInSegment(int speed)
    {
       int travelTime = length / speed;

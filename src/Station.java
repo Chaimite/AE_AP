@@ -18,7 +18,7 @@ public class Station extends Segment
 
    @Override
    public synchronized void addTrain(Train train)
-   {
+   {  // checks the capacity of the station, if its full the train waits
       while (trains.size() > maxCapacity)
       {
          try
@@ -30,17 +30,19 @@ public class Station extends Segment
             e.printStackTrace();
          }
       }
+      //if the station has space it can receive a train
       trains.add(train);
+      //synchronizes with other objects
       notifyAll();
    }
-
+   //method to remove trains
    @Override
    public synchronized void removeTrain(Train train)
    {
       trains.remove(train);
       notifyAll();
    }
-
+   //method to calculate the time the thread will sleep for
    @Override
    public int timeInSegment(int speed)
    {
